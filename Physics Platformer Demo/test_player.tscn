@@ -272,8 +272,8 @@ func shoot_grapple():
 	var space_state = get_world_3d().direct_space_state 
 	# Used in conjunction with space_state to detect collisions
 	var query = PhysicsRayQueryParameters3D.new()
-	query.from = from 
-	query.to = end_point 
+	query.from = Vector3(from.x, from.y, 0.5)  # Set the z-axis of query.from to 0.5
+	query.to = Vector3(end_point.x, end_point.y, 0.5)  # Set the z-axis of query.to to 0.5
 	
 	# Collision data
 	var result = space_state.intersect_ray(query)
@@ -291,7 +291,7 @@ func shoot_grapple():
 		projectile.gravity_scale = 0
 		projectile.connect(\"collided\", Callable(self, \"_on_projectile_collided\"))
 		get_tree().current_scene.add_child(projectile)
-
+		
 		# Set the hook position immediately
 		hook_pos = grapple_point
 		grapple_direction = (grapple_point - from).normalized()
@@ -398,6 +398,7 @@ mesh = SubResource("CapsuleMesh_qthqe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.23472, 9.65786)
 
 [node name="Projectile" parent="." instance=ExtResource("1_if3pt")]
+visible = false
 
 [node name="MeshInstance3D" parent="Projectile" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34372, 1.48517, 0)
