@@ -6,14 +6,20 @@ extends Node3D
 @export_enum ("Static", "Vertical", "Horizontal", "Circular")var movement_type:String = "Static"
 @export var distance_from_center:float = 1.0
 @export var enemy_mesh:MeshInstance3D # use this to re-use the script for multiple enemy types
-@export var enemy_type:int = 1
+# To make this code re-usable for shark, we can set enemy_type to 2.
+@export_range(1, 2) var enemy_type:int = 1 # Determine's health
+
+var health:int
+
 # Not sure if we would need this:
 @export_exp_easing var speed:float = 1.0 # Multiply this by delta. Below 1 slows. 
 
 
 func _init():
-	# something needed to be done here but idk what
-	pass
+	if enemy_type == 2:
+		health = 2
+	else:
+		health = 1
 
 # NOTE: Not sure if we should use _physics_process() instead
 func _process(delta):
@@ -55,9 +61,3 @@ func revive():
 	# Set a timer which will respawn the enemy after a fixed number of seconds
 	pass
 	
-
-
-
-
-
-
