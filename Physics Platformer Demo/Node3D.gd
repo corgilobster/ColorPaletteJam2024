@@ -1,8 +1,9 @@
 extends Node3D
 
-var test3:int = 4
+# NOTE: You might want to get rid of RigidBody3D for something that isn't affected by 
+# gravity. If you run the game right now, the enemy will fall down and flop on its side. :(
 
-@export_enum ("Static", "Pacing Vertical", "Pacing Horizontal", "Circular")var movement_type:String = "Static"
+@export_enum ("Static", "Vertical", "Horizontal", "Circular")var movement_type:String = "Static"
 @export var distance_from_center:float = 1.0
 @export var enemy_mesh:MeshInstance3D # use this to re-use the script for multiple enemy types
 @export var enemy_type:int = 1
@@ -14,9 +15,9 @@ func _init():
 	# something needed to be done here but idk what
 	pass
 
-
+# NOTE: Not sure if we should use _physics_process() instead
 func _process(delta):
-	pass
+	move()
 
 
 func die():
@@ -26,7 +27,7 @@ func die():
 	# to determine is enemy is colliding with player.
 	
 	set_process(false) # we want to call this when death condition is met
-	# aditional note: if we want to respawn enemies, reset position to default
+	# NOTE: if we want to respawn enemies, reset position to default
 	# and call set_process(true)
 	pass
 	
@@ -38,10 +39,10 @@ func move():
 	# NOTE: If the enemy collides with an object, reverse its movement direction
 	# This can be done by multiplying the value by -1 (hopefully it's actually that easy)
 	
-	if movement_type == "Pacing Vertical":
+	if movement_type == "Vertical":
 		pass # we want the enemy to move up and down a distance (distance_from_center)
 		
-	elif movement_type == "Pacing Horizontal":
+	elif movement_type == "Horizontal":
 		pass # we want the enemy to move left and right a distance (distance_from_center)
 		
 	elif movement_type == "Circular":
