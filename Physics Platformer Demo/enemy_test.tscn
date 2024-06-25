@@ -10,9 +10,8 @@ material = SubResource("StandardMaterial3D_bjy5w")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sjpy8"]
 
-[node name="Enemy" type="Node3D" groups=["Player"]]
+[node name="Enemy" type="Node3D"]
 script = ExtResource("1_afvlc")
-goober = "matt"
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
